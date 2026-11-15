@@ -36,8 +36,8 @@ def format_deal_message(deal):
     classification = deal.get("classification")
     if classification:
         lines += [
-            f"Category: {classification['category']}",
-            f"Discount: {classification['discount_worth']}",
+            f"{classification['category']}",
+            f"{classification['discount_worth']}",
             "",
         ]
     lines += [snippet, ""]
