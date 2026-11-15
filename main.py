@@ -27,17 +27,21 @@ def format_deal_message(deal):
     title = deal.get("title", "")
     url = deal.get("url", "")
     content = deal.get("content", "")
-    snippet = content[:240]
+    snippet = content[:480]
 
-    if len(content) > 240:
+    if len(content) > 480:
         snippet = f"{snippet}..."
 
+    lines = [title, url, ""]
     classification = deal.get("classification")
-    tag_line = ""
     if classification:
-        tag_line = f"\n[{classification['category']} | {classification['discount_worth']}]"
-
-    return f"{title}{tag_line}\n{url}\n\n{snippet}"
+        lines += [
+            f"Category: {classification['category']}",
+            f"Discount: {classification['discount_worth']}",
+            "",
+        ]
+    lines += [snippet, ""]
+    return "\n".join(lines)
 
 
 def main():
