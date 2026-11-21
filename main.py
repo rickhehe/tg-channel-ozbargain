@@ -40,7 +40,9 @@ def format_deal_message(deal):
             f"{classification['discount_worth']}",
             "",
         ]
-    lines += [snippet, ""]
+    # Telegram trims trailing whitespace; U+2800 (braille blank) survives, giving
+    # a visible gap between messages in Phone Link notifications.
+    lines += [snippet, "\u2800"]
     return "\n".join(lines)
 
 
